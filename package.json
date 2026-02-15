@@ -1,0 +1,21 @@
+{
+    "name": "yojanasaathi-fullstack",
+    "version": "1.0.0",
+    "description": "Unified platform for YojanaSaathi",
+    "main": "backend/server.js",
+    "scripts": {
+        "install:backend": "cd backend && npm install",
+        "install:frontend": "cd yojanasathi/yojana && npm install",
+        "install:all": "npm run install:backend && npm run install:frontend",
+        "build:frontend": "cd yojanasathi/yojana && npm run build",
+        "copy:frontend": "npx -y shx rm -rf backend/public && npx -y shx mkdir backend/public && npx -y shx cp -r yojanasathi/yojana/dist/* backend/public/",
+        "build:all": "npm run build:frontend && npm run copy:frontend",
+        "start": "node backend/server.js",
+        "dev:backend": "cd backend && node --watch server.js",
+        "dev:frontend": "cd yojanasathi/yojana && npm run dev",
+        "deploy": "npm run install:all && npm run build:all && npm run start"
+    },
+    "devDependencies": {
+        "shx": "^0.3.4"
+    }
+}
