@@ -1,7 +1,13 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 
-dotenv.config();
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const API_URL = "https://openrouter.ai/api/v1/chat/completions";
@@ -24,7 +30,7 @@ export async function callOpenRouter(prompt) {
     });
 
     const data = await response.json();
-    
+
     if (!data.choices || !data.choices[0]) {
       console.error("OpenRouter Error:", data);
       throw new Error("Invalid response from OpenRouter");
